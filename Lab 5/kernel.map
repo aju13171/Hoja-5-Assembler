@@ -1,0 +1,63 @@
+
+Discarded input sections
+
+ .bss           0x00000000        0x0 build/gpio.o
+ .ARM.attributes
+                0x00000000       0x14 build/gpio.o
+ .bss           0x00000000        0x0 build/main.o
+ .ARM.attributes
+                0x00000000       0x14 build/main.o
+ .bss           0x00000000        0x0 build/subrutinas.o
+ .ARM.attributes
+                0x00000000       0x14 build/subrutinas.o
+ .bss           0x00000000        0x0 build/systemTimer.o
+ .ARM.attributes
+                0x00000000       0x14 build/systemTimer.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/gpio.o
+LOAD build/main.o
+LOAD build/subrutinas.o
+LOAD build/systemTimer.o
+
+.init           0x00000000       0x64
+ *(.init)
+ .init          0x00000000       0x64 build/main.o
+                0x00000000                _start
+
+.text           0x00008000      0x274
+ *(.text)
+ .text          0x00008000       0x98 build/gpio.o
+                0x00008000                GetGpioAddress
+                0x00008008                SetGpioFunction
+                0x00008058                SetGpio
+ .text          0x00008098        0x0 build/main.o
+ .text          0x00008098      0x19c build/subrutinas.o
+                0x00008098                Check2
+                0x000080dc                Check
+                0x000080e8                Secuencia1
+                0x00008138                Secuencia2
+                0x00008188                Apagado
+                0x000081b4                Encendido
+                0x000081e0                Asignar
+ .text          0x00008234       0x40 build/systemTimer.o
+                0x00008234                GetSystemTimerBase
+                0x0000823c                GetTimeStamp
+                0x0000824c                Wait
+
+.data           0x00008274        0x0
+ *(.data)
+ .data          0x00008274        0x0 build/gpio.o
+ .data          0x00008274        0x0 build/main.o
+ .data          0x00008274        0x0 build/subrutinas.o
+ .data          0x00008274        0x0 build/systemTimer.o
+
+/DISCARD/
+ *(*)
+OUTPUT(build/output.elf elf32-littlearm)
