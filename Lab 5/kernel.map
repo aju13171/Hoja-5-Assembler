@@ -31,32 +31,33 @@ LOAD build/systemTimer.o
  .init          0x00000000       0x64 build/main.o
                 0x00000000                _start
 
-.text           0x00008000      0x274
+.text           0x00008000      0x258
  *(.text)
  .text          0x00008000       0x98 build/gpio.o
                 0x00008000                GetGpioAddress
                 0x00008008                SetGpioFunction
                 0x00008058                SetGpio
  .text          0x00008098        0x0 build/main.o
- .text          0x00008098      0x19c build/subrutinas.o
-                0x00008098                Check2
-                0x000080dc                Check
-                0x000080e8                Secuencia1
-                0x00008138                Secuencia2
-                0x00008188                Apagado
-                0x000081b4                Encendido
-                0x000081e0                Asignar
- .text          0x00008234       0x40 build/systemTimer.o
-                0x00008234                GetSystemTimerBase
-                0x0000823c                GetTimeStamp
-                0x0000824c                Wait
+ .text          0x00008098      0x180 build/subrutinas.o
+                0x00008098                SetWait
+                0x000080b0                Check2
+                0x000080c8                Check
+                0x000080d4                Secuencia1
+                0x00008124                Secuencia2
+                0x00008174                Apagado
+                0x000081a0                Encendido
+                0x000081cc                Asignar
+ .text          0x00008218       0x40 build/systemTimer.o
+                0x00008218                GetSystemTimerBase
+                0x00008220                GetTimeStamp
+                0x00008230                Wait
 
-.data           0x00008274        0x0
+.data           0x00008258        0x0
  *(.data)
- .data          0x00008274        0x0 build/gpio.o
- .data          0x00008274        0x0 build/main.o
- .data          0x00008274        0x0 build/subrutinas.o
- .data          0x00008274        0x0 build/systemTimer.o
+ .data          0x00008258        0x0 build/gpio.o
+ .data          0x00008258        0x0 build/main.o
+ .data          0x00008258        0x0 build/subrutinas.o
+ .data          0x00008258        0x0 build/systemTimer.o
 
 /DISCARD/
  *(*)

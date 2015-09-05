@@ -1,31 +1,38 @@
+@Universidad del Valle de Guatemala
+@Taller de Assembler
+@Sección 21
+@
+@Laboratorio 5
+@
+@	subrutinas.s
+@
+@Jorge Manrique 13600
+@
+@Christopher Ajú 13171
+@
+
+.globl SetWait
+SetWait:
+	push {lr}
+	
+	cmp r8, #0
+	ldreq r0, =750000
+	
+	cmp r8, #1
+	ldreq r0, =500000
+	
+	pop {pc}
+
 @@r8= tiempo en segundos
 .globl Check2
 Check2:
 	push {lr}
+	
 	cmp r8, #0
-	beq caso1
-	
+	addeq r8, #1
 	cmp r8, #1
-	beq caso2
+	moveq r8, #0
 	
-	cmp r8, #2
-	beq caso3
-	
-caso1:
-	add r8, #1
-	ldr r2, =1000000
-	b fin
-	
-caso2:
-	add r8, #1
-	ldr r2, =500000
-	b fin 
-caso3:
-	mov r8, #0
-	ldr r2, =2000000
-	b fin
-
-fin:
 	pop {pc}
 
 @@r0 = viene ultimo valor de boton
@@ -51,7 +58,7 @@ Secuencia1:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 @ o o x	
@@ -60,7 +67,7 @@ Secuencia1:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 @ o o o
@@ -69,11 +76,11 @@ Secuencia1:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 	bl Apagado
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	pop {pc}
 	
@@ -87,7 +94,7 @@ Secuencia2:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 	bl Apagado
@@ -97,7 +104,7 @@ Secuencia2:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 	bl Apagado
@@ -107,7 +114,7 @@ Secuencia2:
 	mov r1,#1
 	bl SetGpio
 	
-	mov r0, r2
+	bl SetWait
 	bl Wait
 	
 	bl Apagado
@@ -185,6 +192,3 @@ Asignar:
 	bl SetGpioFunction
 	
 	pop {pc}
-
-tiempo:
-	.word 2000000
